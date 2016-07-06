@@ -26,6 +26,8 @@ Alert classification is a complicated task, but with Opsweekly a few simple ques
 	* How have their on calls affected them? 
 	* How much sleep do they lose on average? 
 	* How does this compare to others?
+    * Optionally, one can view a sleep retrospective that compares the last several on-call rotations' impact on sleep loss.
+      * In `phplib/config.php`, define `oncall_sleep_retrospective_count` with a numeric value (such as 3). Users viewing their profile will then see how past weeks affected their sleep.
 * **Meeting Mode**: Make running a weekly meeting simple with all the data you need in one page, and a facility for people to take notes. 
 	* Meeting mode hides all UI displaying only information required for the meeting.
 	* The on call report for the previous week is included, along with key stats and elements from report
@@ -240,5 +242,5 @@ e.g., using cron, weekly at 2pm:
 * As the name implies, Opsweekly is rather tied to the concept of a week. In theory the database stores time ranges, but the UI is all based on a week's worth of data
    * At some point I invisage dropping the concept of a fixed time period and instead having "providers" that pull the periods people were on call, prompting them to fill in the data. E.g. Pagerduty: You were on call from X to Y, please categorise your alerts for that period. 
 * Whilst users can fill in their weekly report and on call report as the week continues, two people cannot edit the same on call report otherwise duplicate events may appear in the reports. This is due to the timestamp being part of the unique key for alerts. 
-* Garbage in, garbage out: There is no way to exclude items returned by the on call providers in the reports right now, outside of deleting anything from the database you're not happy with after compiling the on-call report. I want to add a "soft delete" so deliberately allow editing of reports for unforseen reasons (e.g. monitoring system goes wrong and didn't actually send any alerts but they were logged)
+* ~~Garbage in, garbage out: There is no way to exclude items returned by the on call providers in the reports right now, outside of deleting anything from the database you're not happy with after compiling the on-call report. I want to add a "soft delete" so deliberately allow editing of reports for unforseen reasons (e.g. monitoring system goes wrong and didn't actually send any alerts but they were logged)~~
 
